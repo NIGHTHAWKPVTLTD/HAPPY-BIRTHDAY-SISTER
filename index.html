@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Priyanka 🦋✨</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Kept exactly as requested) -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rosegold: '#ff9a9e',
+                        champagne: '#fecfef',
+                        darkbg: '#1a0b16',
+                        lilac: '#dda0dd'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        cursive: ['"Great Vibes"', 'cursive'],
+                        sans: ['"Poppins"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            /* Cute & Luxurious dark plum gradient */
+            background: linear-gradient(135deg, #1a0b16 0%, #3b112c 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Upgraded Glowing Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 154, 158, 0.3);
+            box-shadow: 0 10px 40px rgba(255, 154, 158, 0.2);
+        }
+
+        /* Floating Animation */
+        .floating { animation: float 4s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Button Heartbeat */
+        .pulse-heart { animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 154, 158, 0.6); }
+            70% { transform: scale(1.08); box-shadow: 0 0 20px 15px rgba(255, 154, 158, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 154, 158, 0); }
+        }
+
+        /* Floating Background Elements */
+        .float-item {
+            position: absolute;
+            color: rgba(255, 154, 158, 0.4);
+            font-size: 1.5rem;
+            animation: floatUp 12s linear infinite;
+            bottom: -10%;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Blinking cursor for typing effect */
+        .cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: #ff9a9e;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body class="font-sans flex flex-col items-center justify-center relative px-5 py-10">
+
+    <!-- Audio Elements (Hidden) -->
+    <audio id="sparkleSound" src="https://www.soundjay.com/misc/sounds/magic-chime-01.mp3" preload="auto"></audio>
+    <audio id="bgMusic" src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" loop preload="auto"></audio>
+
+    <!-- Floating Background Cute Elements -->
+    <div id="float-container" class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="float-item" style="left: 10%; animation-duration: 12s; font-size: 2rem;">🦋</div>
+        <div class="float-item" style="left: 30%; animation-duration: 8s; animation-delay: 2s;">✨</div>
+        <div class="float-item" style="left: 50%; animation-duration: 15s; font-size: 1.5rem;">🌸</div>
+        <div class="float-item" style="left: 70%; animation-duration: 10s; animation-delay: 4s;">💜</div>
+        <div class="float-item" style="left: 85%; animation-duration: 14s; animation-delay: 1s;">🎉</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="z-10 text-center w-full max-w-2xl mx-auto flex flex-col items-center mt-10">
+        
+        <h2 id="subtitle" class="text-champagne font-serif text-lg md:text-2xl tracking-[0.3em] uppercase mb-2 opacity-90">
+            Countdown to
+        </h2>
+        
+        <!-- Glowing Name -->
+        <!-- ADDED id="mainTitle" HERE -->
+        <h1 id="mainTitle" class="font-cursive text-7xl md:text-9xl text-rosegold mb-12 floating" style="text-shadow: 0 0 30px rgba(255,154,158,0.6);">
+            Something special
+        </h1>
+
+        <!-- The Countdown Timer (Matches file aesthetic perfectly) -->
+        <div id="countdown-container" class="flex gap-3 md:gap-5 justify-center flex-wrap mb-10 z-20">
+            <div class="glass-card px-4 py-4 rounded-2xl min-w-[80px] md:min-w-[100px] flex flex-col items-center">
+                <span id="days" class="text-4xl md:text-5xl font-serif text-rosegold mb-1">00</span>
+                <span class="text-xs md:text-sm font-sans text-champagne uppercase tracking-widest font-semibold">Days</span>
+            </div>
+            <div class="glass-card px-4 py-4 rounded-2xl min-w-[80px] md:min-w-[100px] flex flex-col items-center">
+                <span id="hours" class="text-4xl md:text-5xl font-serif text-rosegold mb-1">00</span>
+                <span class="text-xs md:text-sm font-sans text-champagne uppercase tracking-widest font-semibold">Hours</span>
+            </div>
+            <div class="glass-card px-4 py-4 rounded-2xl min-w-[80px] md:min-w-[100px] flex flex-col items-center">
+                <span id="minutes" class="text-4xl md:text-5xl font-serif text-rosegold mb-1">00</span>
+                <span class="text-xs md:text-sm font-sans text-champagne uppercase tracking-widest font-semibold">Mins</span>
+            </div>
+            <div class="glass-card px-4 py-4 rounded-2xl min-w-[80px] md:min-w-[100px] flex flex-col items-center">
+                <span id="seconds" class="text-4xl md:text-5xl font-serif text-rosegold mb-1">00</span>
+                <span class="text-xs md:text-sm font-sans text-champagne uppercase tracking-widest font-semibold">Secs</span>
+            </div>
+        </div>
+
+        <!-- The Magic Button (Hidden initially, appears when timer hits zero) -->
+        <button id="surpriseBtn" onclick="triggerMagic()" style="display: none;" class="glass-card pulse-heart text-white border border-rosegold/60 bg-white/10 px-8 py-4 rounded-full font-serif text-lg md:text-xl tracking-widest hover:bg-rosegold hover:text-darkbg transition duration-500 ease-in-out items-center gap-3 z-20">
+            <span>Tap for a Surprise</span>
+            <span class="text-2xl">🎁</span>
+        </button>
+
+        <!-- Hidden Card that reveals the message -->
+        <div id="messageCard" class="glass-card p-8 md:p-12 rounded-[2.5rem] w-full relative hidden opacity-0 transition-opacity duration-1000 mt-5">
+            <span class="absolute top-4 left-6 text-5xl text-rosegold opacity-30 font-serif">"</span>
+            
+            <!-- Typing Text Container -->
+            <p id="typewriterText" class="font-sans text-base md:text-xl text-gray-200 leading-relaxed font-light z-10 relative cursor text-left min-h-[150px]">
+                <!-- Text will type here via JavaScript -->
+            </p>
+            
+            <p id="signOff" class="font-cursive text-4xl md:text-5xl text-rosegold mt-8 opacity-0 transition-opacity duration-1000">
+                Love you tons! 💜
+            </p>
+        </div>
+
+    </div>
+
+    <!-- JavaScript for Timer, Sounds, Confetti & Typing -->
+    <script>
+        // ========================================================
+        // 🛠️ EDIT THE DATE & TIME HERE! 
+        // Format: "Month DD, YYYY HH:MM:SS"
+        // Set this exactly to when her birthday begins!
+        // ========================================================
+        const birthdayDate = new Date("November 16, 2026 00:00:00").getTime();
+
+        const countdownTimer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+
+            // When the countdown is over
+            if (distance <= 0) {
+                clearInterval(countdownTimer); 
+                
+                // Hide the countdown blocks
+                document.getElementById("countdown-container").style.display = "none";
+                
+                // Update the subtitle text to match the new mood
+                document.getElementById("subtitle").innerText = "Happy Birthday";
+
+                // Update the main title to read "Priyanka"
+                document.getElementById("mainTitle").innerText = "Priyanka";
+                
+                // Show the surprise button (Using 'flex' to keep the icon and text aligned)
+                document.getElementById("surpriseBtn").style.display = "flex"; 
+                return; // Stop the function from running the math below
+            }
+
+            // Math to calculate days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update the HTML numbers
+            document.getElementById("days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+        }, 1000);
+
+
+        // Sibling Love Letter (Edit this however you like!)
+        const letterText = "To the best sister in the world, Priyanka...\n\nHappy Birthday! 🎉 I am so lucky to have you as my sister. You bring so much joy, laughter, and light into our lives.\n\nEven when we annoy each other, you will always be my built-in best friend. May your day be as amazing, fabulous, and beautiful as you are. Keep shining! ✨";
+        
+        let i = 0;
+        const speed = 40; // Speed of typing in milliseconds
+
+        function typeWriter() {
+            if (i < letterText.length) {
+                let char = letterText.charAt(i);
+                // Handle new lines properly in HTML
+                if (char === '\n') {
+                    document.getElementById("typewriterText").innerHTML += "<br>";
+                } else {
+                    document.getElementById("typewriterText").innerHTML += char;
+                }
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Remove cursor blink when done and show sign-off
+                document.getElementById("typewriterText").classList.remove("cursor");
+                document.getElementById("signOff").classList.remove("opacity-0");
+            }
+        }
+
+        function triggerMagic() {
+            // 1. Play Sounds
+            document.getElementById('sparkleSound').play();
+            let music = document.getElementById('bgMusic');
+            music.volume = 0.5; // Keep background music soft
+            music.play();
+
+            // 2. Hide Button
+            document.getElementById('surpriseBtn').style.display = 'none';
+
+            // 3. Show Card with Fade In
+            const card = document.getElementById('messageCard');
+            card.classList.remove('hidden');
+            setTimeout(() => {
+                card.classList.add('opacity-100');
+            }, 100);
+
+            // 4. Start Typing Animation (delay slightly for smooth transition)
+            setTimeout(() => {
+                typeWriter();
+            }, 800);
+
+            // 5. Fire Cute Confetti (Lilac, Pink, and White for a pretty vibe)
+            const duration = 5 * 1000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 6,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff9a9e', '#dda0dd', '#ffffff'] // Cute sisterly colors
+                });
+                confetti({
+                    particleCount: 6,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff9a9e', '#dda0dd', '#ffffff']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+</html>
